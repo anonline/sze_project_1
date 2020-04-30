@@ -1,0 +1,46 @@
+header {
+    background: green;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+#navigation {
+    display: flex;
+}
+
+nav {
+    background: green;
+    color: white;
+    padding: 10px;
+}
+
+a {
+    background: green;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    position: sticky;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.buttons {
+    position: absolute;
+    right: 0px;
+}
+
+button {
+    font-family: arial;
+    border-radius: 6px;
+    box-shadow: inset 0px 1px 0px 0px #fff;
+    background: linear-gradient(to bottom, #ededed 5%);
+    border: 1px solid #dcdcdc;
+}
+
+button:hover {
+    background: linear-gradient(to bottom, #dfdfdf 5%);
+    background-color: #dfdfdf;
+}
