@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angular-sze-project1';
+
+  constructor() {
+    console.log("Congrats, you found my easter egg");
+  }
 }
