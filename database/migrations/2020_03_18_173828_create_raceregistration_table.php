@@ -17,7 +17,7 @@ class CreateRaceregistrationTable extends Migration
             $table->primary('id');
             $table->foreignId('race_id');
             $table->foreignId('user_id');
-            $table->boolean('allowed');
+            $table->boolean('allowed')->default('false');
         });
     }
 

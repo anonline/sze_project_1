@@ -19,12 +19,13 @@ use Illuminate\Support\Facades\Route;
 */
     Route::group([ 'middleware' => 'auth:api'], function()
     {
-
-        Route::post('user/logout', 'UserController@logout');
+        Route::get('user/profile', 'UserController@show');
         Route::post('user/profile', 'UserController@update');
+        Route::post('user/logout', 'UserController@logout');
+        Route::delete('user/profile', 'UserController@destroy');
 
         Route::get('user/races', 'RegisterController@races');
-        Route::post('user/race/{id}', 'RegisterController@store');
+        Route::post('user/race', 'RegisterController@store');
         Route::delete('user/race/{id}', 'RegisterController@destroy');
 
         Route::post('admin/logout', 'AdminController@logout');
@@ -35,11 +36,12 @@ use Illuminate\Support\Facades\Route;
     });
 
     Route::post('admin/login', 'AdminController@login');
-    Route::post('/login', 'UserController@login');
+    Route::post('login', 'UserController@login');
     Route::post('/register', 'UserController@create');
     Route::get('/races', 'RaceController@races');
     Route::post('/race', 'RaceController@store');
     Route::get('race/{id}', 'RaceController@show');
     Route::delete('/race/{id}', 'RaceController@destroy');
+
 
 

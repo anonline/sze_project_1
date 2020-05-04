@@ -8,6 +8,10 @@ class RaceRegistrationModel extends Model
 {
     protected $table = 'race_registration';
 
+    protected $fillable = ['race_id', 'user_id'];
+
+    public $timestamps = false;
+
     public function user(){
 
         return $this->belongsTo('User', 'id', 'user_id');
@@ -15,6 +19,6 @@ class RaceRegistrationModel extends Model
 
     public function race(){
 
-        return $this->belongsTo('RaceModel', 'id', 'race_id');
+        return $this->belongsTo('RaceDataModel', 'id', 'race_id');
     }
 }

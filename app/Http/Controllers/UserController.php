@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use App\UserModel;
+use App\Http\Resources\User as UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Validator;
+use Carbon\Carbon;
 
 
 class UserController extends Controller
@@ -26,23 +27,24 @@ class UserController extends Controller
             'sex' => 'required',
             'phonenumber' => 'required'
         ]);
+
         if ($validator->fails()) {
             return response()->json(['error'=>$validator->errors()], 401);}
 
-            $user = new User( [
+         $user =  User::create([
         'name' => $request['name'],
         'email' => $request['email'],
         'password' => Hash::make($request['password']),
-        'birth_date' => $request['birthdate'],
+        'birth_date' => Carbon::createFromFormat('Y-m-d', $request['birthdate']),
         'phone_number' => $request['phonenumber'],
         'sex' => $request['sex']
-    ]);
+         ]);
+
         $user->save();
 
         $accessToken = $user->createToken('authToken')->accessToken;
 
-
-        return response()->json(['user'=>$user, 'acces_token' => $accessToken], $this-> successStatus);
+        return response()->json(['user'=>$user, 'access_token' => $accessToken], $this-> successStatus);
     }
 
 
@@ -54,7 +56,7 @@ class UserController extends Controller
         ]);
 
         if(\auth()->attempt($validator)){
-            $accessToken = \auth()->user()->createToken('authToken')->accessToken;;
+            $accessToken = \auth()->user()->createToken('authToken')->accessToken;
             return response()->json(['user' => \auth()->user(), 'access_token' => $accessToken], $this-> successStatus);
         }
 
@@ -63,22 +65,21 @@ class UserController extends Controller
         }
     }
 
+    public function logout(Request $request){
 
-    public function show($id)
-    {
-        return (User::findorFail($id));
+        $token = \auth()->user()->token();
+        $token->revoke();
+
+        return response()->json(['logout'=>'success'], $this->successStatus);
+
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+
+    public function show()
     {
-        //
+        return new UserResource(Auth::user());
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -98,28 +99,17 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy()
     {
-        User::destroy($id);
+       $user = Auth::user();
 
-        return response(toJSON("ok"));
+       if(is_null($user)){
+
+           return response()->json([ ], 400);
+       }
+        $user->delete();
+
+        return response()->json(['delete' => 'success'], 200);
     }
-
-    public function getAchievements(){
-
-    }
-
-    public function rateRace(Request $id){
-
-    }
-
-    public function registerRace(Request $id){
-
-    }
-
-    public function deleteRegistration(Request $id){
-
-    }
-
 
 }
