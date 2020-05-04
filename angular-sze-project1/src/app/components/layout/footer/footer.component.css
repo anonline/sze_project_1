@@ -1,0 +1,26 @@
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: green;
+}
+
+#wrapper {
+    display: flex;
+}
+
+div {
+    margin: 10px;
+    color: white;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+    font-family: 'Lucida Sans Unicode', sans-serif;
+}
+
+a:hover {
+    text-decoration: underline;
+}
