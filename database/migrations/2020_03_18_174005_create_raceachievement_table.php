@@ -14,14 +14,14 @@ class CreateRaceachievementTable extends Migration
     public function up()
     {
         Schema::create('race_achievement', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->foreignId('race_id');
             $table->foreignId('user_id');
             $table->date('finish');
-            $table->string('time');
-            $table->string('average_speed');
-            $table->string('space');
-            $table->tinyInteger('rating');
+            $table->time('time');
+            $table->float('average_speed');
+            $table->time('space');
+            $table->tinyInteger('rating')->default(0);
         });
     }
 
@@ -32,6 +32,6 @@ class CreateRaceachievementTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('raceachievement');
+        Schema::drop('race_achievement');
     }
 }

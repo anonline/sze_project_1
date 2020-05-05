@@ -43,4 +43,6 @@ class RegisterController extends Controller
             select('races.*', 'race_data.*')->get());
 
     }
+
+
 }

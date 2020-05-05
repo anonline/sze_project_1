@@ -17,15 +17,16 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('email_verification_hash');
+            $table->timestamp('email_verified_at')->default(null)->nullable();
+            $table->string('email_verification_hash')->default(null)->nullable();
             $table->string('password');
             $table->date('birth_date');
             $table->string('phone_number');
-            $table->string('sex');
-            $table->rememberToken();
-            $table->timestamps();
+            $table->enum('sex', ['female', 'male']);
+
         });
+
+        DB::statement("ALTER TABLE users AUTO_INCREMENT = 1000;");
     }
 
     /**

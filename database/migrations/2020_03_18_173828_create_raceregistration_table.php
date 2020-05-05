@@ -14,10 +14,10 @@ class CreateRaceregistrationTable extends Migration
     public function up()
     {
         Schema::create('race_registration', function (Blueprint $table) {
-            $table->primary('id');
+            $table->increments('id');
             $table->foreignId('race_id');
             $table->foreignId('user_id');
-            $table->boolean('allowed')->default('false');
+            $table->boolean('allowed')->default(0);
         });
     }
 
@@ -28,6 +28,6 @@ class CreateRaceregistrationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('raceregistration');
+        Schema::dropIfExists('race_registration');
     }
 }

@@ -9,8 +9,6 @@ class AchievementModel extends Model
 {
     protected $table = 'race_achievement';
 
-    public $timestamps = false;
-
     public function raceData(){
 
         return $this->belongsTo('App\RaceDataModel', 'race_id', 'id');

@@ -27,5 +27,23 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Passport::routes();
+
+        Gate::define('deleteRace', function ($admin, $race){
+
+            return $admin->id === $race->admin_id;
+
+        });
+
+        Gate::define('updateRace', function ($admin, $race){
+
+            return $admin->id === $race->admin_id;
+
+        });
+
+        Gate::define('allowRegistration', function ($admin, $race){
+
+            return $admin->id === $race->admin_id;
+
+        });
     }
 }

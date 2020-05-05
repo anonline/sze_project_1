@@ -7,7 +7,7 @@ use App\Http\Resources\User as UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 
 
@@ -31,11 +31,12 @@ class UserController extends Controller
         if ($validator->fails()) {
             return response()->json(['error'=>$validator->errors()], 401);}
 
+
          $user =  User::create([
         'name' => $request['name'],
         'email' => $request['email'],
         'password' => Hash::make($request['password']),
-        'birth_date' => Carbon::createFromFormat('Y-m-d', $request['birthdate']),
+        'birth_date' => Carbon::createFromFormat('Y-m-d', $request['birthday']),
         'phone_number' => $request['phonenumber'],
         'sex' => $request['sex']
          ]);
@@ -50,7 +51,7 @@ class UserController extends Controller
 
     public function login(Request $request){
 
-        $validator = $request->validate( [
+        $validator = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
@@ -97,7 +98,7 @@ class UserController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy()
     {

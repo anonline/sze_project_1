@@ -12,15 +12,13 @@ class User extends Authenticatable
 
     use HasApiTokens, Notifiable;
 
+    public $timestamps = false;
+
     protected $table = 'users';
 
-    protected $fillable = [
-        'name', 'email', 'password', 'birth_date', 'phone_number', 'sex'
-    ];
+    protected $fillable = ['name', 'email', 'password', 'birth_date', 'phone_number', 'sex'];
 
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    protected $hidden = ['password'];
 
     protected $casts = [
         'email_verified_at' => 'datetime',

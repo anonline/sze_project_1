@@ -14,7 +14,7 @@ class CreateRacepicturesTable extends Migration
     public function up()
     {
         Schema::create('race_pictures', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->foreignId('race_id');
             $table->string('url');
             $table->boolean('allowed');
@@ -29,6 +29,6 @@ class CreateRacepicturesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('racepictures');
+        Schema::dropIfExists('race_pictures');
     }
 }

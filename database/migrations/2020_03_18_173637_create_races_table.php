@@ -14,13 +14,13 @@ class CreateRacesTable extends Migration
     public function up()
     {
         Schema::create('races', function (Blueprint $table) {
-            $table->primary('id');
+            $table->id();
             $table->string('name');
             $table->string('place');
-            $table->date('date');
+            $table->dateTime('date');
             $table->foreignId('admin_id');
             $table->string('webpage');
-            $table->timestamps();
+
         });
     }
 

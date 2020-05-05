@@ -14,9 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/*Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-*/
     Route::group([ 'middleware' => 'auth:api'], function()
     {
         Route::get('user/profile', 'UserController@show');
@@ -24,24 +21,28 @@ use Illuminate\Support\Facades\Route;
         Route::post('user/logout', 'UserController@logout');
         Route::delete('user/profile', 'UserController@destroy');
 
+        Route::get('user/achievements', 'AchievementController@index');
+        Route::get('user/achievement/{id}', 'AchievementController@show');
+        Route::post('user/achievement', 'RaceController@rateRace');
+
         Route::get('user/races', 'RegisterController@races');
         Route::post('user/race', 'RegisterController@store');
         Route::delete('user/race/{id}', 'RegisterController@destroy');
 
         Route::post('admin/logout', 'AdminController@logout');
         Route::post('admin/race', 'RaceController@store');
-        Route::delete('admin/race', 'RaceController@destroy');
         Route::put('admin/race/{id}', 'RaceController@store');
+        Route::delete('race/{id}', 'RaceController@destroy');
 
     });
 
+    Route::post('admin/register', 'AdminController@store');
     Route::post('admin/login', 'AdminController@login');
     Route::post('login', 'UserController@login');
-    Route::post('/register', 'UserController@create');
-    Route::get('/races', 'RaceController@races');
-    Route::post('/race', 'RaceController@store');
+    Route::post('register', 'UserController@create');
+    Route::get('races', 'RaceController@races');
     Route::get('race/{id}', 'RaceController@show');
-    Route::delete('/race/{id}', 'RaceController@destroy');
+
 
 
 

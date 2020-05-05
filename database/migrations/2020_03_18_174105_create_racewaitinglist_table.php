@@ -14,7 +14,7 @@ class CreateRacewaitinglistTable extends Migration
     public function up()
     {
         Schema::create('race_waiting_list', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->foreignId('race_id');
             $table->foreignId('user_id');
             $table->date('date');
@@ -28,6 +28,6 @@ class CreateRacewaitinglistTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('racewaitinglist');
+        Schema::dropIfExists('race_waiting_list');
     }
 }
