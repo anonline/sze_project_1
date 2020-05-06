@@ -29,8 +29,14 @@ use Illuminate\Support\Facades\Route;
         Route::post('user/race', 'RegisterController@store');
         Route::delete('user/race/{id}', 'RegisterController@destroy');
 
+
+    });
+
+    Route::group([ 'middleware' => 'auth:api-admin'], function(){
+
+        Route::get('admin/races', 'AdminRaceController@index');
         Route::post('admin/logout', 'AdminController@logout');
-        Route::post('admin/race', 'RaceController@store');
+        Route::post('admin/race', 'AdminRaceController@store');
         Route::put('admin/race/{id}', 'RaceController@store');
         Route::delete('race/{id}', 'RaceController@destroy');
 

@@ -9,6 +9,7 @@ class RaceModel extends Model
 {
     protected $table = 'races';
     protected $primaryKey = 'id';
+    public $timestamps = false;
 
     public function users(){
 

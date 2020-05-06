@@ -54,6 +54,7 @@ class AdminController extends Controller
 
         /** @var  $admin
          * because the Passport package always uses users provider model in config/auth to authenticate
+         * need some hack
          * baaah
          */
         $admin = AdminModel::where('email', '=', $request['email'])->first();

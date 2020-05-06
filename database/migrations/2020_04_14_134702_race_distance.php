@@ -17,8 +17,8 @@ class RaceDistance extends Migration
             $table->increments('id');
             $table->foreignId('races_id');
             $table->float('distance');
-            $table->integer('max_register_number');
-            $table->integer('register_number');
+            $table->integer('max_register_number')->default(100);
+            $table->integer('register_number')->default(0);
             $table->integer('rating')->default(0);
             $table->integer('number_of_votes')->default(0);
 

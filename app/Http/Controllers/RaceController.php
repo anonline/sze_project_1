@@ -22,23 +22,7 @@ class RaceController extends Controller
 
     public function store(Request $request)
     {
-        $race = $request->isMethod('put') ? RaceModel::findOrFail($request->id) : new RaceModel();
 
-        $race->id = $request->input('id');
-        $race->admin_id = auth()->user()->id;
-        $race->name = $request->input('name');
-        $race->place = $request->input('place');
-        $race->date = $request->input('date');
-        $race->webpage = $request->input('webpage');
-
-        $race->save();
-
-        $racedata = RaceDataModel::create([
-            'distance' => $request->input('distance'),
-            'races_id' => $race->id,
-            'max_register_number' => $request->input('max_register_number')
-        ]);
-        $racedata->save();
 
     }
 
