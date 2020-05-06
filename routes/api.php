@@ -29,7 +29,6 @@ use Illuminate\Support\Facades\Route;
         Route::post('user/race', 'RegisterController@store');
         Route::delete('user/race/{id}', 'RegisterController@destroy');
 
-
     });
 
     Route::group([ 'middleware' => 'auth:api-admin'], function(){
@@ -39,16 +38,16 @@ use Illuminate\Support\Facades\Route;
         Route::post('admin/race', 'AdminRaceController@store');
         Route::put('admin/race/{id}', 'RaceController@store');
         Route::delete('race/{id}', 'RaceController@destroy');
+        Route::post('admin/achievements', 'AchievementController@store');
 
     });
 
     Route::post('admin/register', 'AdminController@store');
     Route::post('admin/login', 'AdminController@login');
+
     Route::post('login', 'UserController@login');
     Route::post('register', 'UserController@create');
+
     Route::get('races', 'RaceController@races');
     Route::get('race/{id}', 'RaceController@show');
-
-
-
 

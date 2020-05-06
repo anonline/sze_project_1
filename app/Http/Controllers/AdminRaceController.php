@@ -67,6 +67,9 @@ class AdminRaceController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        RaceModel::find($id)->delete();
+        RaceDataModel::where('races_id', '=', $id)->delete();
+
     }
 }

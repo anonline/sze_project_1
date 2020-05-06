@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\AdminModel;
-use Illuminate\Auth\AuthManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -52,15 +51,8 @@ class AdminController extends Controller
             'password' => 'required',
         ]);
 
-        /** @var  $admin
-         * because the Passport package always uses users provider model in config/auth to authenticate
-         * need some hack
-         * baaah
-         */
-        $admin = AdminModel::where('email', '=', $request['email'])->first();
+        if( \auth()->attempt($validator)){
 
-        if( !is_null($admin) && Hash::check($request['password'], $admin->password)){
-            Auth::login($admin);
             $accessToken = \auth()->user()->createToken('authToken')->accessToken;
             return response()->json(['user' => \auth()->user(), 'access_token' => $accessToken], $this-> successStatus);
         }
@@ -77,30 +69,6 @@ class AdminController extends Controller
 
         return response()->json(['logout'=>'success'], $this->successStatus);
 
-    }
-
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 
 

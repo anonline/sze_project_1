@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\Achievement as AchievementResource;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\AchievementModel;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class AchievementController extends Controller
 {
@@ -22,18 +22,30 @@ class AchievementController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
-        //
+        $achievement = AchievementModel::create([
+            'race_id' => $request['race_id'],
+            'user_id' => $request['user_id'],
+            'finish' => Carbon::createFromFormat('Y-m-d H:i:s', $request['finish']) ,
+            'time' => $request['time'],
+            'average_speed' => $request['average_speed'],
+            'space' => $request['space']
+        ]);
+
+        $achievement->save();
+
+        return response()->json([''], 200);
+
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return AchievementResource
      */
     public function show($id)
     {

@@ -17,7 +17,7 @@ class CreateRaceachievementTable extends Migration
             $table->increments('id');
             $table->foreignId('race_id');
             $table->foreignId('user_id');
-            $table->date('finish');
+            $table->dateTime('finish');
             $table->time('time');
             $table->float('average_speed');
             $table->time('space');

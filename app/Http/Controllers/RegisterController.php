@@ -21,6 +21,8 @@ class RegisterController extends Controller
 
         $race_registration->save();
 
+        DB::table('race_data')->where('id', '=', $request->race_id)->increment('register_number');
+
         return response()->json(['registration' => 'success']);
 
     }
