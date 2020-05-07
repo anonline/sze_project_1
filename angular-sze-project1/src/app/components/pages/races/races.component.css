@@ -1,0 +1,17 @@
+div {
+    font-family: 'Franklin Gothic Medium', Arial, sans-serif;
+}
+
+#search {
+    font-family: arial;
+    border-radius: 6px;
+    box-shadow: inset 0px 1px 0px 0px #fff;
+    background: linear-gradient(to bottom, #ededed 5%);
+    border: 1px solid #dcdcdc;
+    font-size: 20px;
+}
+
+#search:hover {
+    background: linear-gradient(to bottom, #dfdfdf 5%);
+    background-color: #dfdfdf;
+}
