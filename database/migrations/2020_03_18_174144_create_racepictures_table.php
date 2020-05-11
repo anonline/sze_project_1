@@ -18,7 +18,6 @@ class CreateRacepicturesTable extends Migration
             $table->foreignId('race_id');
             $table->string('url');
             $table->boolean('allowed');
-            $table->timestamps();
         });
     }
 

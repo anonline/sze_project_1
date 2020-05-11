@@ -17,7 +17,7 @@ class CreateRacewaitinglistTable extends Migration
             $table->increments('id');
             $table->foreignId('race_id');
             $table->foreignId('user_id');
-            $table->date('date');
+            $table->timestamp('created_at');
         });
     }
 

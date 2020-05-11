@@ -26,9 +26,11 @@ use Illuminate\Support\Facades\Route;
         Route::post('user/achievement', 'RaceController@rateRace');
 
         Route::get('user/races', 'RegisterController@races');
-        Route::post('user/race', 'RegisterController@store');
+        Route::post('user/race', 'RegisterController@store')->middleware(\App\Http\Middleware\CheckRegisterLimit::class);
         Route::delete('user/race/{id}', 'RegisterController@destroy');
 
+        Route::post('user/waitinglist', 'WaitingListController@store');
+        
     });
 
     Route::group([ 'middleware' => 'auth:api-admin'], function(){
